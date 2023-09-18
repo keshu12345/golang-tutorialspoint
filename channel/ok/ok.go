@@ -14,6 +14,18 @@ func main() {
 		userChan <- "hello  Bob"
 	}()
 
+	for {
+		select {
+		case user, ok := <-userChan:
+
+			if !ok {
+				return
+			} else {
+				fmt.Println(user)
+			}
+
+		}
+	}
 	userName, ok := <-userChan
 
 	if !ok {
